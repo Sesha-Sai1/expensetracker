@@ -25,12 +25,17 @@ const ExpenseTraker = () => {
     setDescription("");
     setAmount("");
   };
-
+  let availableBalance;
   const handleList = (ind) => {
     const updatedData = transaction.filter((val, index) => {
+      availableBalance = (balance) => {
+        return balance - val.amount;
+      };
+
       return index !== ind;
     });
     setTransaction(updatedData);
+    setBalance(availableBalance);
   };
   return (
     <div>
@@ -38,7 +43,7 @@ const ExpenseTraker = () => {
         <h1>ExpenseTraker</h1>
         <div className="balance">
           <h2>
-            Total Balance:$ <spam id="balance">{balance.toFixed(2)}</spam>
+            Total Balance:$ <span id="balance">{balance.toFixed(2)}</span>
           </h2>
         </div>
         <div className="transaction">
